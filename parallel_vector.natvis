@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+	<!-- array_view<T> -->
+	<Type Name="utl::array_view&lt;*&gt;">
+		<DisplayString>{{ size={mEnd - mBegin} }}</DisplayString>
+		<Expand>
+			<ArrayItems>
+				<Size>mEnd - mBegin</Size>
+				<ValuePointer>mBegin</ValuePointer>
+			</ArrayItems>
+		</Expand>
+	</Type>
+
+	<!-- parallel_vector -->
+	<Type Name="utl::detail::parallel_vector_impl&lt;utl::detail::type_list&lt;*&gt;,*&gt;">
+		<DisplayString>{{ size={mSize} }}</DisplayString>
+		<Expand>
+			<Item Name="[capacity]">mCapacity</Item>
+			<Synthetic Name="Slice 0">
+				<DisplayString></DisplayString>
+				<Expand>
+					<ArrayItems>
+						<Size>mSize</Size>
+						<ValuePointer>($T1*)mMemory</ValuePointer>
+					</ArrayItems>
+				</Expand>
+			</Synthetic>
+		</Expand>
+	</Type>
+	<Type Name="utl::detail::parallel_vector_impl&lt;utl::detail::type_list&lt;*,*&gt;,*&gt;">
+		<DisplayString>{{ size={mSize} }}</DisplayString>
+		<Expand>
+			<Item Name="[capacity]">mCapacity</Item>
+			<Synthetic Name="Slice 0">
+				<DisplayString></DisplayString>
+				<Expand>
+					<ArrayItems>
+						<Size>mSize</Size>
+						<ValuePointer>($T1*)mMemory</ValuePointer>
+					</ArrayItems>
+				</Expand>
+			</Synthetic>
+			<Synthetic Name="Slice 1">
+				<DisplayString></DisplayString>
+				<Expand>
+					<ArrayItems>
+						<Size>mSize</Size>
+						<ValuePointer>($T2*)((char*)mMemory + sizeof($T1) * mCapacity)</ValuePointer>
+					</ArrayItems>
+				</Expand>
+			</Synthetic>
+		</Expand>
+	</Type>
+	<Type Name="utl::detail::parallel_vector_impl&lt;utl::detail::type_list&lt;*,*,*&gt;,*&gt;">
+		<DisplayString>{{ size={mSize} }}</DisplayString>
+		<Expand>
+			<Item Name="[capacity]">mCapacity</Item>
+			<Synthetic Name="Slice 0">
+				<DisplayString></DisplayString>
+				<Expand>
+					<ArrayItems>
+						<Size>mSize</Size>
+						<ValuePointer>($T1*)mMemory</ValuePointer>
+					</ArrayItems>
+				</Expand>
+			</Synthetic>
+			<Synthetic Name="Slice 1">
+				<DisplayString></DisplayString>
+				<Expand>
+					<ArrayItems>
+						<Size>mSize</Size>
+						<ValuePointer>($T2*)((char*)mMemory + sizeof($T1) * mCapacity)</ValuePointer>
+					</ArrayItems>
+				</Expand>
+			</Synthetic>
+			<Synthetic Name="Slice 2">
+				<DisplayString></DisplayString>
+				<Expand>
+					<ArrayItems>
+						<Size>mSize</Size>
+						<ValuePointer>($T3*)((char*)mMemory + (sizeof($T1) + sizeof($T2)) * mCapacity)</ValuePointer>
+					</ArrayItems>
+				</Expand>
+			</Synthetic>
+		</Expand>
+	</Type>
+
+</AutoVisualizer>
